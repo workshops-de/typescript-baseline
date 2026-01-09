@@ -11,7 +11,7 @@ const user = {
 /*
  * TODO:
  * Extrahiere aus user:
- * - name
+ * - firstName
  * - email
  *
  * Extrahiere aus settings:
@@ -19,5 +19,5 @@ const user = {
  * - language
  *
  * ➡️ Wichtig:
- * Greife nicht mit user.name oder user.settings.theme zu, sondern nutze Destructuring.Extrah
+ * Greife nicht mit user.name oder user.settings.theme zu, sondern nutze Destructuring.
  */
