@@ -1,4 +1,4 @@
-# JavaScript Onboarding — Kursübersicht
+# JavaScript Hands-On
 
 Kurz und prägnant: Dieses Repository enthält Lernmodule mit kurzen Übungen und Referenzlösungen.
 
