@@ -1,10 +1,25 @@
 const scores = [12, 5, 29, 29, 8, 17];
 
-// Aufgabe 1
-function determineTopScores(scores, countOfTopScores) {}
+// Aufgabe 1 - Lösung
+function determineTopScores(scores, countOfTopScores) {
+  return scores
+    .toSorted((previous, current) => current - previous)
+    .slice(0, countOfTopScores);
+}
 
-// Aufgabe 2
-function replaceScore(scores, index, newScore) {}
+const topScores = determineTopScores(scores, 3);
+console.log(topScores);
+
+// Aufgabe 2 - Lösung
+function replaceScore(scores, index, newScore) {
+  return scores.with(index, newScore);
+}
+const scoresWithReplacement = replaceScore(scores, 1, 100);
+console.log(scoresWithReplacement);
+
+// Aufgabe 3 (Bonus) - Lösung
+const lastIndexOfValue29 = scores.findLastIndex(score => score == 29);
+console.log(lastIndexOfValue29);
 
 /* TODO:
  *
