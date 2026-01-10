@@ -2,9 +2,7 @@ const scores = [12, 5, 29, 29, 8, 17];
 
 // Aufgabe 1 - Lösung
 function determineTopScores(scores, countOfTopScores) {
-  return scores
-    .toSorted((previous, current) => current - previous)
-    .slice(0, countOfTopScores);
+  return scores.toSorted((a, b) => b - a).slice(0, countOfTopScores);
 }
 
 const topScores = determineTopScores(scores, 3);
