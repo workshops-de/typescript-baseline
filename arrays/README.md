@@ -33,11 +33,15 @@ Diese Methoden **ändern das bestehende Array direkt**. Das kann zu Seiteneffekt
 
 Typische mutable Methoden:
 
-- push(), pop()
-- shift(), unshift()
-- splice()
-- sort()
-- reverse()
+| Methode   | Kurzbeschreibung                                                                                                  |
+| --------- | ----------------------------------------------------------------------------------------------------------------- |
+| push()    | Fügt ein oder mehrere Elemente ans Ende des Arrays hinzu (verändert das Original).                                |
+| pop()     | Entfernt das letzte Element des Arrays und gibt es zurück (verändert das Original).                               |
+| shift()   | Entfernt das erste Element des Arrays und gibt es zurück; alle Indizes verschieben sich (verändert das Original). |
+| unshift() | Fügt ein oder mehrere Elemente an den Anfang des Arrays ein (verändert das Original).                             |
+| splice()  | Fügt an einer beliebigen Position Elemente ein, entfernt oder ersetzt Elemente (verändert das Original).          |
+| sort()    | Sortiert die Elemente des Arrays in-place nach einer Vergleichsfunktion (verändert das Original).                 |
+| reverse() | Kehrt die Reihenfolge der Elemente um (verändert das Original).                                                   |
 
 Beispiel:
 
@@ -54,10 +58,12 @@ Das ist in moderner JavaScript-Entwicklung meist der bevorzugte Stil.
 
 Klassische non-mutating Methoden:
 
-- map()
-- filter()
-- slice()
-- concat()
+| Methode  | Kurzbeschreibung                                                                                                 |
+| -------- | ---------------------------------------------------------------------------------------------------------------- |
+| map()    | Erzeugt ein neues Array mit den Rückgabewerten einer Funktion für jedes Element (Original bleibt unverändert).   |
+| filter() | Erzeugt ein neues Array mit allen Elementen, die eine gegebene Bedingung erfüllen (Original bleibt unverändert). |
+| slice()  | Gibt eine flache Kopie eines Abschnitts des Arrays als neues Array zurück (Original bleibt unverändert).         |
+| concat() | Verbindet zwei oder mehr Arrays/Elemente und gibt ein neues Array zurück (Originale bleiben unverändert).        |
 
 Beispiel:
 
@@ -74,11 +80,14 @@ console.log(numbers); // [1, 2, 3] → unverändert
 Diese Methoden sind moderne Alternativen zu mutierenden Methoden.
 Sie verhalten sich gleich, **ändern aber nicht das Original-Array**.
 
-- toSorted() → wie sort(), aber ohne Mutation
-- toReversed() → wie reverse(), aber ohne Mutation
-- toSpliced() → wie splice(), aber ohne Mutation
-- with(index, value) → ersetzt genau ein Element ohne Mutation
-- findLast(), findLastIndex() → Suche von hinten
+| Methode            | Kurzbeschreibung                                                                                                       |
+| ------------------ | ---------------------------------------------------------------------------------------------------------------------- |
+| toSorted()         | Gibt ein neues, sortiertes Array zurück, ohne das Original zu verändern (wie sort() ohne Mutation).                    |
+| toReversed()       | Gibt ein neues Array mit umgekehrter Reihenfolge zurück, ohne das Original zu verändern (wie reverse() ohne Mutation). |
+| toSpliced()        | Führt Einfügen/Entfernen/Ersetzen an einer Position durch und liefert ein neues Array (wie splice() ohne Mutation).    |
+| with(index, value) | Liefert ein neues Array mit dem Element an `index` durch `value` ersetzt (Original bleibt unverändert).                |
+| findLast()         | Gibt das letzte Element zurück, das eine Bedingung erfüllt (Suche von hinten).                                         |
+| findLastIndex()    | Gibt den Index des letzten Elements zurück, das eine Bedingung erfüllt (Suche von hinten).                             |
 
 Beispiel:
 
