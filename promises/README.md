@@ -77,13 +77,13 @@ Merksatz:
 Wichtige Nuancen, die in der Praxis wie “nicht immer” wirken können:
 
 1. **Nie settled, nie finally**
-   Wenn ein Promise nie aufgelöst/abgelehnt wird (z.B. ein hängender Request ohne Timeout), läuft finally nicht, weil es nichts gibt, “woran” es sich ausführen könnte. (Folgerung aus “runs when settled”.) :contentReference[oaicite:2]{index=2}
+   Wenn ein Promise nie aufgelöst/abgelehnt wird (z.B. ein hängender Request ohne Timeout), läuft finally nicht, weil es nichts gibt, “woran” es sich ausführen könnte. (Folgerung aus “runs when settled”.)
 
 2. **finally kann das Ergebnis der Kette verändern**
    finally soll das Ergebnis “eigentlich” durchreichen, aber:
    - wirft der finally-Callback einen Fehler, wird die Kette ab da rejected
    - gibt der finally-Callback ein rejected Promise zurück, wird die Kette ebenfalls rejected
-     Das bedeutet: finally wird zwar ausgeführt, kann aber den späteren Output beeinflussen. :contentReference[oaicite:3]{index=3}
+     Das bedeutet: finally wird zwar ausgeführt, kann aber den späteren Output beeinflussen.
 
 Kurzfazit:
 
