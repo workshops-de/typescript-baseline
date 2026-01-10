@@ -1,55 +1,67 @@
-## Was bedeutet „der Code wird in Microtasks fortgesetzt“? (einfach erklärt)
+# async / await in JavaScript
 
-JavaScript führt Code **nicht gleichzeitig**, sondern **Schritt für Schritt** aus.
+## Was ist async / await?
 
-Dabei gibt es vereinfacht **zwei Warteschlangen**:
+**async / await** ist eine **Syntax-Erweiterung** für Promises.
+Sie ändert **nicht**, wie JavaScript asynchron arbeitet, sondern **wie der Code geschrieben und gelesen wird**.
 
-1. **Call Stack** – das, was gerade **jetzt sofort** ausgeführt wird
+Ziel:
 
-## Was bedeutet „der Code wird in Microtasks fortgesetzt“? (einfach erklärt)
+- weniger then()-Ketten
+- besser lesbarer, „synchron wirkender“ Code
+- gleiche Promise-Mechanik unter der Haube
 
-JavaScript führt Code **nicht gleichzeitig**, sondern **Schritt für Schritt** aus.
+Merksatz:
+async / await = **andere Schreibweise für Promises**, kein neues Konzept
 
-Dabei gibt es vereinfacht **zwei Warteschlangen**:
+## async – was bedeutet das?
 
-1. **Call Stack** – das, was gerade **jetzt sofort** ausgeführt wird
-2. **Warteschlangen** – Dinge, die **später** drankommen
+Eine Funktion mit dem Schlüsselwort `async`:
 
-Für den Einstieg reicht dieses Modell:
-
-## Die Idee hinter async / await (ohne Fachbegriffe)
-
-Wenn JavaScript auf `await` trifft:
-
-- JavaScript **stoppt nicht das ganze Programm**
-- sondern sagt:
-  > „Diese Funktion kann hier erstmal warten.
-  > Mach mit anderem Code weiter."
+- gibt **immer ein Promise zurück**
+- auch dann, wenn explizit ein normaler Wert zurückgegeben wird
 
 Beispiel:
 
 ```js
-async function run() {
-  console.log('A');
-  await promise;
-  console.log('B');
+async function getNumber() {
+  return 42;
 }
 ```
 
-Ablauf:
+Ergebnis:
 
-1. "A" wird sofort ausgeführt
-2. bei `await promise` wird die Funktion **unterbrochen**
-3. anderer JavaScript-Code darf weiterlaufen
-4. sobald das Promise fertig ist → wird der Rest der Funktion fortgesetzt
-5. "B" wird ausgeführt
+- Rückgabewert ist **kein** 42
+- Rückgabewert ist ein Promise, das mit 42 erfüllt wird
+
+## await – was passiert hier?
+
+`await`:
+
+- wartet auf die **Erfüllung oder Ablehnung** eines Promises
+- darf **nur innerhalb einer async-Funktion** verwendet werden
+- „pausiert“ nur die async-Funktion, **nicht** den gesamten JavaScript-Thread
+
+Beispiel:
+
+```js
+async function loadValue() {
+  const result = await somePromise;
+  console.log(result);
+}
+```
+
+Was intern passiert:
+
+- JavaScript blockiert nicht
+- der Code wird in Microtasks fortgesetzt, sobald das Promise settled ist
 
 ## Was ist dabei eine Microtask? (ohne Vorwissen)
 
 Eine **Microtask** ist:
 
 > ein sehr hoch priorisierter „Merkzettel“ für JavaScript:
-> _„Mach das als NÄCHSTES, sobald du kurz Zeit hast."_
+> _„Mach das als NÄCHSTES, sobald du kurz Zeit hast.“_
 
 Promises (und damit auch await) nutzen genau diese Art von Merkzettel.
 
@@ -59,78 +71,132 @@ Wichtig für das Verständnis:
 - **danach** arbeitet es sofort alle Microtasks ab
 - **erst danach** kommen Dinge wie Timer (setTimeout)
 
-## Warum ist das wichtig für await?
+## async / await vs. Promise-Chain (Vergleich)
 
-Wenn ein Promise fertig ist:
+Promise-Chain:
 
-- wird **kein Code direkt mitten im laufenden Code ausgeführt**
-- stattdessen wird der Rest der async-Funktion als **Microtask vorgemerkt**
-- dieser Code läuft **so früh wie möglich**, aber **nicht sofort**
+```js
+fetchData()
+  .then(data => process(data))
+  .then(result => save(result))
+  .catch(err => handle(err));
+```
 
-Deshalb sagt man:
+Mit async / await:
 
-> „Der Code nach await wird als Microtask fortgesetzt."
+```js
+async function run() {
+  try {
+    const data = await fetchData();
+    const result = process(data);
+    save(result);
+  } catch (err) {
+    handle(err);
+  }
+}
+```
 
-## Mini-Beispiel zum Einprägen
+Wichtig:
+
+- Lesbarkeit ist der Hauptgewinn
+- Kontrollfluss wirkt linear, ist es aber technisch nicht
+
+## Fehlerbehandlung mit async / await
+
+Fehler in await:
+
+- ein rejected Promise verhält sich wie ein throw
+- muss mit try / catch behandelt werden
 
 Beispiel:
 
 ```js
-console.log('1');
-
-Promise.resolve().then(() => console.log('2'));
-
-console.log('3');
+async function run() {
+  try {
+    const value = await riskyPromise;
+    console.log(value);
+  } catch (err) {
+    console.error('Fehler:', err);
+  }
+}
 ```
 
-Ausgabe:
-1
-3
-2
+Ohne try / catch:
 
-Warum?
+- das zurückgegebene Promise ist rejected
+- der Aufrufer muss catch verwenden
 
-- "1" → sofort
-- Promise.then → Microtask (für später vorgemerkt)
-- "3" → sofort
-- danach → Microtask läuft → "2"
+## Mehrere Promises mit await
 
-## Übertragen auf async / await
+### Seriell (nacheinander)
 
-Dieser Code:
+await blockiert **innerhalb der Funktion**, daher:
 
 ```js
 async function run() {
-  console.log('A');
-  await Promise.resolve();
-  console.log('B');
+  const a = await p1;
+  const b = await p2;
 }
-
-run();
-console.log('C');
 ```
 
-Ausgabe:
-A
-C
-B
+p2 startet erst, nachdem p1 fertig ist.
 
-Warum?
+### Parallel (empfohlen, wenn möglich)
 
-- "A" → sofort
-- await → Funktion pausiert
-- "C" → läuft weiter
-- Promise ist sofort fertig → Rest von run() wird als Microtask ausgeführt
-- "B"
+```js
+async function run() {
+  const [a, b] = await Promise.all([p1, p2]);
+}
+```
 
-## Merksatz für Einsteiger
+Beide Promises laufen gleichzeitig.
 
-- `await` blockiert **nicht JavaScript**
-- es verschiebt den restlichen Code der Funktion **nach hinten**
-- dieser Code kommt **sehr früh dran**, noch vor Timern
-- dieses „sehr früh, aber nicht sofort" nennt man **Microtask**
+## finally bei async / await
 
-Für den Einstieg reicht dieses mentale Modell vollkommen aus.
+try / catch / finally verhält sich **analog** zu Promise.finally():
 
-Die Übungsaufgabe wurde in die Datei `problem.js` ausgelagert.
+- finally läuft, wenn das Promise settled ist
+- unabhängig von Erfolg oder Fehler
+- außer: das Promise wird nie settled
+
+Beispiel:
+
+```js
+async function run() {
+  try {
+    await p;
+  } catch (e) {
+    console.log('Fehler');
+  } finally {
+    console.log('Cleanup');
+  }
+}
+```
+
+## Typische Anfängerfehler
+
+- await außerhalb von async verwenden
+- async-Funktionen aufrufen, aber das Promise nicht behandeln
+- mehrere await unnötig seriell ausführen
+- glauben, await blockiert JavaScript komplett
+
+## Übungsaufgabe (Beginner)
+
 Gegeben:
+Eine Funktion delay(ms), die ein Promise nach ms Millisekunden erfüllt.
+
+Aufgaben:
+
+1. Schreibe eine async-Funktion run(), die:
+   - "Start" loggt
+   - await delay(1000) ausführt
+   - danach "Ende" loggt
+2. Baue einen Fehlerfall ein:
+   - delay(ms) soll rejecten, wenn ms < 0
+   - fange den Fehler mit try / catch ab
+3. Ergänze ein finally, das immer "done" loggt
+
+Erwartung:
+
+- Bei ms = 1000: Start → (1s Pause) → Ende → done
+- Bei ms < 0: Fehler → done
