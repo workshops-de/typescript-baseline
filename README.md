@@ -34,9 +34,14 @@ Kurz und prägnant: Dieses Repository enthält Lernmodule mit kurzen Übungen un
 
 ## Lektionen
 
-- `destructuring/` — Object Destructuring
-- `spread-operator/` — Spread Operator (`...`)
-- `modules/` — JavaScript Modules (ESM)
+| Verzeichnis        | Thema                       | Kurzbeschreibung                                                                                                            |
+| ------------------ | --------------------------- | --------------------------------------------------------------------------------------------------------------------------- |
+| `destructuring/`   | Object Destructuring        | Eigenschaften von Objekten direkt in Variablen übernehmen (inkl. Default-Werte, Umbenennung, verschachteltes Destructuring) |
+| `spread-operator/` | Spread Operator (`...`)     | Arrays/Objekte auseinanderziehen, kopieren, zusammenführen und in Funktionsaufrufen verwenden                               |
+| `modules/`         | JavaScript Modules (ESM)    | Exports/Imports, Modul-APIs und Analogien zu C#/Python/Java                                                                 |
+| `arrays/`          | Arrays in JavaScript        | Grundlagen, mutable vs. non-mutating Methoden und neue ES2023-Methoden (change-by-copy)                                     |
+| `promises/`        | Promises in JavaScript      | Promise-Grundlagen, Zustände und then/catch/finally sowie Promise-Chains                                                    |
+| `async-await/`     | async / await in JavaScript | async/await-Syntax, Fehlerbehandlung, Promise.all und parallele vs. serielle Ausführung                                     |
 
 ## Projektstruktur (Konvention)
 
