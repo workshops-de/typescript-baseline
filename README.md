@@ -3,7 +3,7 @@
 <p align="center">
   <img alt="workshops-de-logo-blue" src=".docs/logo-workshops-de.png" width="120">
   <br>
-  <em>The best way to get started with JavaScript for modern web frameworks</em>
+  <em>The best way to get started with TypeScript for modern web frameworks</em>
   <br>
 </p>
 
@@ -14,55 +14,56 @@
 
 ## Getting Started
 
-- Voraussetzungen: [Node (LTS)](https://nodejs.org) ist installiert.
+- Voraussetzungen: [Node (LTS)](https://nodejs.org) & [VS Code](https://code.visualstudio.com/) sind installiert.
 - Nur klonen (Es ist keine Installation von Abhängigkeiten erforderlich):
 
 ```bash
-git clone https://github.com/workshops-de/javascript-baseline.git
+git clone https://github.com/workshops-de/typescript-baseline.git
 cd javascript-baseline
 ```
 
 ### JavaScript mit Node ausführen
 
-> Mit einem geöffneten Terminal im Verzeichnis `javascript-baseline` ...
+> Mit einem geöffneten Terminal im Verzeichnis `typescript-baseline` ...
 
 ```bash
-node ./<lektion>/problem.js`
+node ./<lektion>/problem.ts`
 ```
 
 Kurz und prägnant: Dieses Repository enthält Lernmodule mit kurzen Übungen und Referenzlösungen.
 
 ## Lektionen
 
-| Verzeichnis        | Thema                       | Kurzbeschreibung                                                                                                            |
-| ------------------ | --------------------------- | --------------------------------------------------------------------------------------------------------------------------- |
-| `destructuring/`   | Object Destructuring        | Eigenschaften von Objekten direkt in Variablen übernehmen (inkl. Default-Werte, Umbenennung, verschachteltes Destructuring) |
-| `spread-operator/` | Spread Operator (`...`)     | Arrays/Objekte auseinanderziehen, kopieren, zusammenführen und in Funktionsaufrufen verwenden                               |
-| `modules/`         | JavaScript Modules (ESM)    | Exports/Imports, Modul-APIs und Analogien zu C#/Python/Java                                                                 |
-| `arrays/`          | Arrays in JavaScript        | Grundlagen, mutable vs. non-mutating Methoden und neue ES2023-Methoden (change-by-copy)                                     |
-| `promises/`        | Promises in JavaScript      | Promise-Grundlagen, Zustände und then/catch/finally sowie Promise-Chains                                                    |
-| `async-await/`     | async / await in JavaScript | async/await-Syntax, Fehlerbehandlung, Promise.all und parallele vs. serielle Ausführung                                     |
+| Verzeichnis                         | Thema                              | Kurzbeschreibung                                                                        |
+| ----------------------------------- | ---------------------------------- | --------------------------------------------------------------------------------------- |
+| `syntax-type-annotation/`           | Syntax & Type Annotation           | Variablen, Arrays, Objekte und Funktionen typisieren inkl. Type Inference               |
+| `type-interface-wiederverwendung/`  | Type & Interface                   | Wiederverwendbare Domänenmodelle mit type und interface, inkl. extends und Intersection |
+| `spezielle-typen/`                  | Spezielle Typen                    | null, undefined, any, unknown und never verstehen und bewusst einsetzen                 |
+| `discriminated-unions-type-guards/` | Discriminated Unions & Type Guards | Unions mit Discriminator-Feld und eigene Type Guards für sichere Typunterscheidung      |
+| `generics/`                         | Generics                           | Generische Funktionen, Interfaces und Klassen für flexible, typsichere Wiederverwendung |
+| `es-modules/`                       | ES Modules                         | import/export, Modulstruktur und Type-Only Imports in TypeScript                        |
+| `class/`                            | Klassen                            | Konstruktor, Methoden, Vererbung und Zugriffsmodifikatoren (public, private, protected) |
 
 ## Projektstruktur (Konvention)
 
 - Jede Lektion liegt in einem eigenen Verzeichnis.
 - In jedem Verzeichnis gibt es:
   - `README.md` — Know‑how & kurze Erklärungen zur Lektion
-  - `problem.js` — Übungsaufgabe (zu lösen)
-  - `solution.js` oder `solution/` — Referenzlösung(en)
+  - `problem.ts` — Übungsaufgabe (zu lösen)
+  - `solution.ts` oder `solution/` — Referenzlösung(en)
 
-## Wie benutzt man die Übungen
+## Wie benutzt man die Übungen?
 
-1. Öffne das Verzeichnis der Lektion, z. B. `cd destructuring`
-2. Öffne `problem.js` und löse die Aufgabe, ohne die Lösung zu öffnen.
-3. Nachdem du die Aufgabe gelöst hast, teste das Ergebnis mit Node (aus dem Projekt-Root):
+1. Öffne das Verzeichnis der Lektion, z. B. `cd syntax-type-annotation`
+2. Öffne `problem.ts` und löse die Aufgabe, ohne die Lösung zu öffnen.
+3. Nachdem du die Aufgabe gelöst hast, teste das Ergebnis mit tsx (aus dem Projekt-Root):
 
    ```bash
-   node ./destructuring/problem.js
+   npx tsx ./syntax-type-annotation/problem.ts
    ```
 
    Nach dem Lösen kannst du zur Kontrolle die Referenzlösung ausführen:
 
    ```bash
-   node ./destructuring/solution.js
+   npx tsx ./syntax-type-annotation/solution.ts
    ```
