@@ -19,10 +19,10 @@
 
 ```bash
 git clone https://github.com/workshops-de/typescript-baseline.git
-cd javascript-baseline
+cd typescript-baseline
 ```
 
-### JavaScript mit Node ausführen
+### TypeScript mit Node ausführen
 
 > Mit einem geöffneten Terminal im Verzeichnis `typescript-baseline` ...
 
