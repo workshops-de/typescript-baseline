@@ -1,4 +1,4 @@
-# JavaScript Baseline
+# TypeScript Baseline
 
 <p align="center">
   <img alt="workshops-de-logo-blue" src=".docs/logo-workshops-de.png" width="120">
