@@ -8,10 +8,10 @@ const selectedId = null;
 
 let payload = JSON.parse('{}');
 
-function parseInput(value: any) {
-  return 'unbekannt';
+function upperCaseText(value: any) {
+  return 'DEFAULT';
 }
 
-console.log(parseInput(payload));
+console.log(upperCaseText(payload));
 
 export { };

@@ -2,13 +2,11 @@ const selectedId: string | null = null;
 
 let payload: unknown = JSON.parse("{}");
 
-function parseInput(value: unknown): string {
+function upperCaseText(value: unknown): string {
   if (typeof value === "string") return value;
-  return "unbekannt";
+  return "DEFAULT";
 }
 
-function fail(message: string): never {
-  throw new Error(message);
-}
+console.log(upperCaseText(payload));
 
 export { };
