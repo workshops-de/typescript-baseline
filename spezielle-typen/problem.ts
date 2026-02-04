@@ -1,8 +1,7 @@
 /*
  * TODO: Ergänze die passenden speziellen Typen.
  * 1) selectedId soll explizit "kein Wert" erlauben (null).
- * 2) payload soll defensiver typisiert werden, damit `any` entfernt werden kann.
- * 3) parseInput soll unknown entgegennehmen und nur nach Check nutzen.
+ * 2) parseInput soll unknown entgegennehmen und nur nach Check nutzen.
  */
 
 const selectedId = null;
@@ -13,8 +12,6 @@ function parseInput(value: any) {
   return 'unbekannt';
 }
 
-function fail(message: string) {
-  throw new Error(message);
-}
+console.log(parseInput(payload));
 
-export {};
+export { };
